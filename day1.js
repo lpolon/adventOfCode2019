@@ -14,7 +14,7 @@ What is the sum of the fuel requirements for all of the modules on your spacecra
 */
 // shift + alt + I --> select end of lines
 
-// part 1
+// part 2
 const puzzleInput = [
   89122,
   141123,
@@ -117,20 +117,14 @@ const puzzleInput = [
   101173,
   51906
 ];
-// calculate fuel required to launch
 const fuelRequirement = mass => Math.floor(mass / 3) - 2;
-// sum of fuel requirements
 
-const getSum = arr => arr.reduce((acc, mass) => acc + fuelRequirement(mass), 0);
-
-console.log(getSum(puzzleInput));
-
-// part2
-
-// WIP
 const recursiveFuelReq = mass => {
-  if (mass <= 0) {return}
   const massValue = fuelRequirement(mass);
+  if (massValue <= 0) return 0
   return massValue + recursiveFuelReq(massValue);
 };
-console.log(recursiveFuelReq(14));
+
+const getSum = arr => arr.reduce((acc, mass) => acc + recursiveFuelReq(mass), 0);
+
+console.log(getSum(puzzleInput));
